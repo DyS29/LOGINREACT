@@ -4,7 +4,7 @@ import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
 
-function Conversor () {
+function Conversor() {
   const [texto, setTexto] = useState('');
   const [vozATexto, setVozATexto] = useState('');
 
@@ -21,7 +21,7 @@ function Conversor () {
     setVozATexto(evento.results[0][0].transcript);
   }
 
-  function grabarVozATexto() {  
+  function grabarVozATexto() {
     const agente = new webkitSpeechRecognition();
     agente.lang = "es-ES";
     agente.start();
@@ -30,10 +30,10 @@ function Conversor () {
 
   return (
     <>
-    <h1>Conversor TTS Y STT</h1>
-      <br/>
+      <h1>Conversor TTS Y STT</h1>
+      <br />
       <h3>Conversor de Texto a Voz</h3>
-      <input type="text" name="texto" id="texto" value={texto} onChange={cambiarTexto} /> 
+      <input type="text" name="texto" id="texto" value={texto} onChange={cambiarTexto} />
       <button onClick={convertirTexto}>Convertir</button>
 
       <h3>Conversor de Voz a Texto</h3>
@@ -42,5 +42,5 @@ function Conversor () {
     </>
   );
 
- }
+}
 export default Conversor

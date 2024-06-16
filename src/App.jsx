@@ -1,53 +1,64 @@
 import { useEffect, useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
 import './App.css';
-import Conversor from './Conversor'; 
+import Usuarios from './Usuarios'
+import Conversor from './Conversor'
+import Registro from './Registro'
 
 function App() {
   const [usuario, setUsuario] = useState('');
   const [clave, setClave] = useState('');
   const [logueado, setLogueado] = useState(false)
+  const [recargar, setRecargar] = useState(false)
+
   function cambiarUsuario(evento) {
     setUsuario(evento.target.value);
   }
   function cambiarClave(evento) {
     setClave(evento.target.value);
   }
+
+  function recargarAhora(evento) {
+    setRecargar(!recargar)
+  }
   async function ingresar() {
-    const peticion = await fetch('http://localhost:3000/login?usuario='+ usuario +'&clave='+ clave,{credentials:'include'})
-    if (peticion.ok){
+    const peticion = await fetch('http://localhost:3000/login?usuario=' + usuario + '&clave=' + clave, { credentials: 'include' })
+    if (peticion.ok) {
       setLogueado(true)
-    }else { 
+    } else {
       alert('Usuario o Clave incorrectos')
     }
-    //if (usuario === 'admin' && clave === 'admin') {
-    //  alert('Ingresaste');
-    //  setLogueado(true)
-    //} else {
-    //  alert('Usuario o clave incorrecta');
-    //}
   }
 
   async function validar() {
-    const peticion = await fetch('http://localhost:3000/validar',{credentials:'include'})
-    if (peticion.ok){
-     setLogueado(true)
+    const peticion = await fetch('http://localhost:3000/validar', { credentials: 'include' })
+    if (peticion.ok) {
+      setLogueado(true)
     }
   }
-  useEffect(()=>{
+
+  useEffect(() => {
     validar()
-  },[])
-  
+  }, [])
+
   if (logueado) {
-    return <Conversor/>
+    return (
+      <>
+        <Registro recargarAhora={recargarAhora} />
+        <Conversor />
+        <Usuarios recargar={recargar} />
+      </>)
+
   }
   return (
     <>
-    <h1>Insisio de Sesion</h1>
-      < input placeholder= "Usuario"type="text" name="usuario" id="usuario" value={usuario} onChange={cambiarUsuario} />
-      <input placeholder='Clave' type="password" name="clave" id="clave" value={clave} onChange={cambiarClave} />
+      <h1>Insisio de Sesion</h1>
+      <input placeholder="Usuario" type="text" name="usuario" id="usuario" value=
+        {usuario} onChange={cambiarUsuario} />
+      <input placeholder='Clave' type="password" name="clave" id="clave" value=
+        {clave} onChange={cambiarClave} />
       <button onClick={ingresar}>Ingresar</button>
+
+
     </>
   );
 }
