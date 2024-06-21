@@ -30,7 +30,7 @@ function App() {
   }
 
   async function validar() {
-    const peticion = await fetch(import.meta.envVITE_HOSTBACKEND + '/validar', { credentials: 'include' })
+    const peticion = await fetch(import.meta.env.VITE_HOSTBACKEND + '/validar', { credentials: 'include' })
     if (peticion.ok) {
       setLogueado(true)
     }
@@ -51,7 +51,7 @@ function App() {
   }
   return (
     <>
-      <h1>Insisio de Sesion</h1>
+      <h1>Inicio de Sesión</h1>
       <input placeholder="Usuario" type="text" name="usuario" id="usuario" value=
         {usuario} onChange={cambiarUsuario} />
       <input placeholder='Clave' type="password" name="clave" id="clave" value=
