@@ -5,7 +5,7 @@ function Usuarios({ recargar }) {
   const [usuarios, setUsuarios] = useState([]); // Cambiar `usuario` a `usuarios`
 
   async function obtenerUsuarios() {
-    const peticion = await fetch(import.meta.env.VITE_HOSTBACKEND + 'usuarios', { credentials: 'include' });
+    const peticion = await fetch(import.meta.env.VITE_HOSTBACKEND + '/usuarios', { credentials: 'include' });
     if (peticion.ok) {
       const respuesta = await peticion.json();
       setUsuarios(respuesta);
