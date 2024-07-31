@@ -22,7 +22,7 @@ function App() {
     setRecargar(!recargar)
   }
   async function ingresar() {
-    const peticion = await fetch('http://localhost:3000/login?usuario=' + usuario + '&clave=' + clave, { credentials: 'include' })
+    const peticion = await fetch(import.meta.env.VITE_HOSTBACKEND + '/login?usuario=' + usuario + '&clave=' + clave, { credentials: 'include' })
     if (peticion.ok) {
       setLogueado(true)
     } else {
@@ -31,7 +31,7 @@ function App() {
   }
 
   async function validar() {
-    const peticion = await fetch('http://localhost:3000/validar', { credentials: 'include' })
+    const peticion = await fetch(import.meta.env.VITE_HOSTBACKEND + '/validar', { credentials: 'include' })
     if (peticion.ok) {
       setLogueado(true)
     }
@@ -52,7 +52,7 @@ function App() {
   }
   return (
     <>
-      <h1>Insisio de Sesion</h1>
+      <h1>Inicio de Sesión</h1>
       <input placeholder="Usuario" type="text" name="usuario" id="usuario" value=
         {usuario} onChange={cambiarUsuario} />
       <input placeholder='Clave' type="password" name="clave" id="clave" value=
